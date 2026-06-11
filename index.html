@@ -8,52 +8,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="https://thehappyhour-org.github.io/ithh.png">
     <style>
-        :root { --bg: #050505; --surface: #0f0f0f; --accent: #e11d48; --border: #1f1f1f; --btn-border: rgba(179, 92, 92, 0.4); --btn-border-hover: rgba(225, 29, 72, 1); --text-dim: #71717a; --white: #ffffff; --item-bg: rgba(255, 255, 255, 0.02); --header-h: 300px; --img-size: 90px; }
+        :root { --bg: #050505; --surface: #0f0f0f; --accent: #e11d48; --border: #1f1f1f; --btn-border: rgba(179, 92, 92, 0.4); --text-dim: #71717a; --white: #fff; --item-bg: rgba(255, 255, 255, 0.02); --header-h: 300px; --img-size: 90px; }
         * { margin: 0; padding: 0; box-sizing: border-box; scrollbar-width: none; -ms-overflow-style: none; }
         *::-webkit-scrollbar {display: none;}
-        html, body { height: 100%; overflow: hidden; }
-        body { background-color: var(--bg); font-family: 'Poppins', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        html, body { height: 100%; overflow: hidden; background: var(--bg); font-family: 'Poppins', sans-serif; display: flex; justify-content: center; align-items: center; }
         .glow { position: fixed; top: 0; right: 0; width: 400px; height: 400px; background: radial-gradient(circle, rgba(225, 29, 72, 0.05) 0%, transparent 70%); z-index: -1; }
         .container { width: 100%; max-width: 440px; perspective: 1000px; margin: auto; }
         .main-card { width: 100%; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; position: relative; }
-        .container.flipped .main-card { transform: rotateY(180deg); }
-        .front, .back { width: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); transform: translateZ(0); }
-        .header { height: var(--header-h); background: linear-gradient(rgba(5, 40, 79, 0.4), rgba(0, 0, 0, 0.4), rgb(15, 15, 15)), url('https://thehappyhour-org.github.io/thh.jpg'); background-size: cover; background-position: center; border-radius: 20px 20px 0 0; display: flex; justify-content: center; align-items: flex-end; }
-        .image { width: var(--img-size); height: var(--img-size); border-radius: 50%; margin-bottom: calc(var(--img-size) / -2); overflow: hidden; }
+        .flipped .main-card { transform: rotateY(180deg); }
+        .front, .back { width: 100%; backface-visibility: hidden; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .header { height: var(--header-h); background: linear-gradient(rgba(5,40,79,0.4), rgba(0,0,0,0.4), #0f0f0f), url('https://thehappyhour-org.github.io/thh.jpg') center/cover; border-radius: 20px 20px 0 0; display: flex; justify-content: center; align-items: flex-end; }
+        .image { width: var(--img-size); height: var(--img-size); border-radius: 50%; margin-bottom: -45px; overflow: hidden; }
         .image img { width: 100%; height: 100%; object-fit: cover; }
         .content { padding: 60px 30px 30px; text-align: center; color: var(--white); }
         .name { font-size: 1.5rem; margin-bottom: 5px; font-weight: 600; }
         .text { font-size: 0.85rem; color: var(--text-dim); margin-top: 10px; line-height: 1.6; }
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 25px 0; padding: 15px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-        .stats h3 { font-size: 1rem; color: var(--white); }
+        .stats h3 { font-size: 1rem; color: var(--white); font-weight: 700; }
         .stats p { font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; }
-        .explore-btn { background: var(--accent); color: white; padding: 14px 40px; border-radius: 50px; font-weight: 600; cursor: pointer; border: none; width: 100%; transition: transform 0.2s ease; }
+        .explore-btn { background: var(--accent); color: #fff; padding: 14px 40px; border-radius: 50px; font-weight: 600; cursor: pointer; border: none; width: 100%; transition: transform 0.2s; }
         .explore-btn:active { transform: scale(0.98); }
-        
         .back { transform: rotateY(180deg); position: absolute; top: 0; left: 0; padding: 30px 20px 20px; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
-        .back-header { border-left: 3px solid var(--accent); padding-left: 15px; margin-bottom: 20px; flex-shrink: 0; }
-        .back-header h1 { font-family: 'Syncopate', sans-serif; font-size: 1.1rem; color: white; letter-spacing: 2px; }
+        .back-header { border-left: 3px solid var(--accent); padding-left: 15px; margin-bottom: 20px; }
+        .back-header h1 { font-family: 'Syncopate', sans-serif; font-size: 1.1rem; color: #fff; letter-spacing: 2px; }
         .back-header p { font-size: 0.55rem; color: var(--text-dim); letter-spacing: 2px; }
-        
         .directory-wrapper { position: relative; display: flex; overflow: hidden; gap: 8px; flex: 1; }
         .directory-list { flex: 1; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; padding-bottom: 5px; }
-        .scroll-track { width: 2px; background: rgba(255, 255, 255, 0.01); border-radius: 10px; position: relative; margin-bottom: 5px; }
-        .scroll-thumb { width: 100%; height: 30%; background: white; opacity: 0.1; border-radius: 10px; position: absolute; top: 0; transition: top 0.1s linear; }
-
-        .item { background: var(--item-bg); padding: 14px 18px; text-decoration: none; color: white; display: flex; align-items: center; justify-content: space-between; border-radius: 12px; border: 1px solid var(--btn-border); transition: all 0.3s ease; flex-shrink: 0; }
-        .item:hover { background: rgba(225, 29, 72, 0.08); border-color: var(--btn-border-hover); }
+        .scroll-track { width: 2px; background: rgba(255,255,255,0.01); border-radius: 10px; position: relative; margin-bottom: 5px; }
+        .scroll-thumb { width: 100%; height: 30%; background: #fff; opacity: 0.1; border-radius: 10px; position: absolute; top: 0; transition: top 0.1s; }
+        .item { background: var(--item-bg); padding: 14px 18px; text-decoration: none; color: #fff; display: flex; align-items: center; justify-content: space-between; border-radius: 12px; border: 1px solid var(--btn-border); transition: all 0.3s; flex-shrink: 0; }
+        .item:hover { background: rgba(225, 29, 72, 0.08); border-color: var(--accent); }
         .item-main { display: flex; align-items: center; gap: 15px; }
-        .icon-box { width: 38px; height: 38px; border-radius: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(225, 29, 72, 0.3); display: flex; justify-content: center; align-items: center; color: var(--accent); }
+        .icon-box { width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(225,29,72,0.3); display: flex; justify-content: center; align-items: center; color: var(--accent); }
         .info b { display: block; font-size: 0.85rem; letter-spacing: 0.3px; }
         .info span { font-size: 0.7rem; color: var(--text-dim); }
-        .item-sub { font-size: 0.65rem; color: var(--accent); font-weight: 600; white-space: nowrap; opacity: 0.85; }
-        .contact-section { margin-top: 45px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.04); flex-shrink: 0; }
-        .back-btn { margin-top: 15px; color: var(--text-dim); font-size: 0.7rem; cursor: pointer; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 5px; flex-shrink: 0; }
-
-        @media (max-width: 480px) {
-            :root { --header-h: 260px; --img-size: 85px; }
-            .content { padding: 50px 20px 25px; }
-        }
+        .item-sub { font-size: 0.65rem; color: var(--accent); font-weight: 700; white-space: nowrap; opacity: 0.85; }
+        .contact-section { margin-top: 45px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.04); }
+        .back-btn { margin-top: 15px; color: var(--text-dim); font-size: 0.7rem; cursor: pointer; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 5px; }
+        @media (max-width: 480px) {:root { --header-h: 260px; --img-size: 85px; } .container { padding: 0 15px; } .content { padding: 50px 20px 25px; } }
     </style>
 </head>
 <body>
@@ -61,11 +53,7 @@
     <div class="container" id="flipContainer">
         <div class="main-card">
             <div class="front">
-                <div class="header">
-                    <div class="image">
-                        <img src="https://thehappyhour-org.github.io/ithh.png" alt="logo">
-                    </div>
-                </div>
+                <div class="header"><div class="image"><img src="https://thehappyhour-org.github.io/ithh.png" alt="logo"></div></div>
                 <div class="content">
                     <h3 class="name">THE HAPPY HOUR</h3>
                     <p class="text">We are a community that provides kind of content to our members at no cost.</p>
@@ -74,144 +62,54 @@
                         <div><h3>1</h3><p>Group</p></div>
                         <div><h3 id="subscriberCount">...</h3><p>Users</p></div>
                     </div>
-                    <button class="explore-btn" onclick="toggleFlip()">EXPLORE CHANNELS</button>
+                    <button class="explore-btn" onclick="f()">EXPLORE CHANNELS</button>
                 </div>
             </div>
-
             <div class="back">
-                <div class="back-header">
-                    <h1>DIRECTORY</h1>
-                    <p>SECURE ACCESS SYSTEM</p>
-                </div>
-
+                <div class="back-header"><h1>DIRECTORY</h1><p>SECURE ACCESS PAGE</p></div>
                 <div class="directory-wrapper">
-                    <div class="directory-list" id="dirList">
-                        <a href="https://telegram.me/thehappyhour_org" class="item">
-                            <div class="item-main">
-                                <div class="icon-box"><i data-lucide="shield-check" size="18"></i></div>
-                                <div class="info"><b>BACKUP CHANNEL</b><span>For Critical Update</span></div>
-                            </div>
-                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
-                                <span class="item-sub" id="sub-the_happy_hours">...</span>
-                                <i data-lucide="chevron-right" size="14"></i>
-                            </div>
+                    <div class="directory-list" id="dl">
+                        <a href="https://t.me/thehappyhour_org" class="item">
+                            <div class="item-main"><div class="icon-box"><i data-lucide="radio-tower" size="18"></i></div><div class="info"><b>BACKUP CHANNEL</b><span>For Critical Update</span></div></div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><span class="item-sub" id="sub-the_happy_hours">...</span><i data-lucide="chevron-right" size="14"></i></div>
                         </a>
-                        <a href="https://telegram.me/thappyhour" class="item">
-                            <div class="item-main">
-                                <div class="icon-box"><i data-lucide="search" size="18"></i></div>
-                                <div class="info"><b>REQUEST GROUP</b><span>Request Movie Here</span></div>
-                            </div>
-                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
-                                <span class="item-sub" id="sub-The_happy_Hour_Group">...</span>
-                                <i data-lucide="chevron-right" size="14"></i>
-                            </div>
+                        <a href="https://t.me/thappyhour" class="item">
+                            <div class="item-main"><div class="icon-box"><i data-lucide="search" size="18"></i></div><div class="info"><b>REQUEST GROUP</b><span>Request Movie Here</span></div></div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><span class="item-sub" id="sub-The_happy_Hour_Group">...</span><i data-lucide="chevron-right" size="14"></i></div>
                         </a>
-                        <a href="https://telegram.me/+wNQhpTqCnBdkOTI1" class="item">
-                            <div class="item-main">
-                                <div class="icon-box"><i data-lucide="zap" size="18"></i></div>
-                                <div class="info"><b>MOVIE UPDATES</b><span>New Movies Update</span></div>
-                            </div>
-                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
-                                <span class="item-sub" id="sub-wNQhpTqCnBdkOTI1">...</span>
-                                <i data-lucide="chevron-right" size="14"></i>
-                            </div>
+                        <a href="https://t.me/THH_Animeee" class="item">
+                            <div class="item-main"><div class="icon-box"><i data-lucide="tv" size="18"></i></div><div class="info"><b>ANIME CHANNEL</b><span>Watch Anime Free</span></div></div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><span class="item-sub" id="sub-THH_Animeee">...</span><i data-lucide="chevron-right" size="14"></i></div>
                         </a>
-                        <a href="https://telegram.me/THH_Animeee" class="item">
-                            <div class="item-main">
-                                <div class="icon-box"><i data-lucide="tv" size="18"></i></div>
-                                <div class="info"><b>ANIME CHANNEL</b><span>Watch Anime Free</span></div>
-                            </div>
-                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
-                                <span class="item-sub" id="sub-THH_Animeee">...</span>
-                                <i data-lucide="chevron-right" size="14"></i>
-                            </div>
+                        <a href="https://t.me/THH_Book" class="item">
+                            <div class="item-main"><div class="icon-box"><i data-lucide="book-marked" size="18"></i></div><div class="info"><b>BOOK CHANNEL</b><span>Books PDF For Free</span></div></div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><span class="item-sub" id="sub-THH_Book">...</span><i data-lucide="chevron-right" size="14"></i></div>
                         </a>
-                        <a href="https://telegram.me/THH_Book" class="item">
-                            <div class="item-main">
-                                <div class="icon-box"><i data-lucide="book-marked" size="18"></i></div>
-                                <div class="info"><b>BOOK CHANNEL</b><span>Books PDF For Free</span></div>
-                            </div>
-                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
-                                <span class="item-sub" id="sub-THH_Book">...</span>
-                                <i data-lucide="chevron-right" size="14"></i>
-                            </div>
+                        <a href="https://t.me/THH_Support" class="item">
+                            <div class="item-main"><div class="icon-box"><i data-lucide="messages-square" size="18"></i></div><div class="info"><b>SUPPORT GROUP</b><span>Feedbacks & Suggestions</span></div></div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><span class="item-sub" id="sub-THH_Support">...</span><i data-lucide="chevron-right" size="14"></i></div>
                         </a>
                     </div>
-                    <div class="scroll-track">
-                        <div class="scroll-thumb" id="scrollThumb"></div>
-                    </div>
+                    <div class="scroll-track"><div class="scroll-thumb" id="st"></div></div>
                 </div>
-
                 <div class="contact-section">
-                    <a href="https://telegram.me/Its_scarface_bot" class="item">
-                        <div class="item-main">
-                            <div class="icon-box"><i data-lucide="user-cog" size="18"></i></div>
-                            <div class="info"><b>ADMIN SUPPORT</b><span>Contact The Admin</span></div>
-                        </div>
+                    <a href="https://t.me/Its_scarface_bot" class="item">
+                        <div class="item-main"><div class="icon-box"><i data-lucide="user-cog" size="18"></i></div><div class="info"><b>ADMIN SUPPORT</b><span>Contact The Admin</span></div></div>
                         <i data-lucide="chevron-right" size="14"></i>
                     </a>
                 </div>
-                <div class="back-btn" onclick="toggleFlip()">← BACK TO PROFILE</div>
+                <div class="back-btn" onclick="f()">← BACK TO PROFILE</div>
             </div>
         </div>
     </div>
-
     <script>
-        function toggleFlip() { document.getElementById('flipContainer').classList.toggle('flipped'); }
-
+        const T='8675488243:AAGgxFJzzo8GoV3Or9vog4ktUD_kr7ZHO68',f=()=>document.getElementById('flipContainer').classList.toggle('flipped'),dl=document.getElementById('dl'),st=document.getElementById('st');
         lucide.createIcons();
-
-        const dirList = document.getElementById('dirList');
-        const scrollThumb = document.getElementById('scrollThumb');
-
-        dirList.addEventListener('scroll', () => {
-            const scrollTotal = dirList.scrollHeight - dirList.clientHeight;
-            if (scrollTotal <= 0) return;
-            const scrollPercent = (dirList.scrollTop / scrollTotal) * 70;
-            scrollThumb.style.top = scrollPercent + '%';
-        });
-
-        function formatCount(count) {
-            count = parseInt(count);
-            if (isNaN(count)) return null;
-            if (count >= 1000000) return (count / 1000000).toFixed(1) + "M";
-            return (count / 1000).toFixed(2).replace(/0+$/, '').replace(/\.$/, '') + "K";
-        }
-
-        async function fetchSubCount(username) {
-            try {
-                const url = `https://api.codetabs.com/v1/proxy/?quest=https://t.me/${username}`;
-                const response = await fetch(url);
-                const html = await response.text();
-                const match = html.match(/<div class="tgme_page_extra">([\d\s,]+)\s*(subscribers|members)/);
-                if (match && match[1]) {
-                    const raw = match[1].replace(/[\s,]/g, '');
-                    return formatCount(raw);
-                }
-                return null;
-            } catch (err) {
-                console.log(`${username}`, err);
-                return null;
-            }
-        }
-
-        const channels = [
-            ['subscriberCount',        'thehappyhour_org'],
-            ['sub-the_happy_hours',    'thehappyhour_org'],
-            ['sub-The_happy_Hour_Group','thappyhour'],
-            ['sub-THH_Book',           'THH_Book'],
-            ['sub-THH_Animeee',        'THH_Animeee'],
-        ];
-
-        document.getElementById('sub-wNQhpTqCnBdkOTI1').textContent = '6.7K';
-
-        channels.forEach(async ([elId, username]) => {
-            const count = await fetchSubCount(username);
-            const el = document.getElementById(elId);
-            if (el) {
-                el.textContent = count ? count : '—';
-            }
-        });
+        dl.onscroll=()=>{const s=dl.scrollHeight-dl.clientHeight;if(s>0)st.style.top=(dl.scrollTop/s)*70+'%'};
+        const fc=c=>{c=parseInt(c);return isNaN(c)?null:c>=1e6?(c/1e6).toFixed(1)+'M':(c/1e3).toFixed(c%1e3?2:0)+'K'};
+        const fs=async u=>{try{const r=await fetch(`https://api.telegram.org/bot${T}/getChatMemberCount?chat_id=@${u}`),j=await r.json();return j.ok?fc(j.result):null}catch{return null}};
+        const CH=[['subscriberCount','thehappyhour_org'],['sub-THH_Support','THH_Support'],['sub-the_happy_hours','thehappyhour_org'],['sub-The_happy_Hour_Group','thappyhour'],['sub-THH_Book','THH_Book'],['sub-THH_Animeee','THH_Animeee']];
+        CH.forEach(async([i,u])=>{const c=await fs(u);if(document.getElementById(i))document.getElementById(i).textContent=c||'—'});
     </script>
 </body>
 </html>
